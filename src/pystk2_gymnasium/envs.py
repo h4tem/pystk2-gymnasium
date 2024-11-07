@@ -410,6 +410,11 @@ class STKRaceEnv(BaseSTKRaceEnv):
     ) -> Tuple[pystk2.WorldState, Dict[str, Any]]:
         random = np.random.RandomState(seed)
 
+        # Ajout d'un nettoyage manuel pour self.race
+        if self.race:
+            print("Nettoyage de la course en cours avant le reset.")
+            self.race = None  # Libère la course manuellement pour éviter les conflits
+
         super().reset_race(random, options=options)
 
         # Set the controlled kart position (if any)
